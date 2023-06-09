@@ -18,10 +18,17 @@ function getEventData(url) {
   });
 }
 
-var seatgeek_URL = `https://api.seatgeek.com/2/events?client_id=${seatgeek_client_id}&client_secret=${seatgeek_client_secret}`;
+// var seatgeek_URL = `https://api.seatgeek.com/2/events?client_id=${seatgeek_client_id}&client_secret=${seatgeek_client_secret}`;
+// getEventData(seatgeek_URL);
 
-getEventData(seatgeek_URL);
+// Arguments:
+var geoip = "30024";
+var range = "30mi";
+var sort = "datetime_local.asc";
+var per_page = "25";
+var taxonomies = "sports";
+var performers = "";
 
-var seatgeek_URL_geoip = `https://api.seatgeek.com/2/events?client_id=${seatgeek_client_id}&client_secret=${seatgeek_client_secret}&geoip=30024&range=30mi`;
+var seatgeek_url_with_arguments = `https://api.seatgeek.com/2/events?client_id=${seatgeek_client_id}&client_secret=${seatgeek_client_secret}&geoip=${geoip}&range=${range}&sort=${sort}&per_page=${per_page}&taxonomies.name=${taxonomies}`;
 
-getEventData(seatgeek_URL_geoip);
+getEventData(seatgeek_url_with_arguments);
