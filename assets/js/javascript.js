@@ -1,19 +1,22 @@
 
 //Current Weather API Endpoint
+
+var inputZip = document.getElementById("zipcode");
+
+
 //href = curl --compressed --request GET --url \
 //'https://api.tomorrow.io/v4/timelines?location=40.75872069597532,-73.98529171943665&fields=temperature&timesteps=1h&units=metric&apikey=VaTD4KM7W4nSBR8fev6ibZwqfUxPG0I7'
 const button = document.getElementById('button-id')
 button.addEventListener("click",function(){
-    fetch('https://api.tomorrow.io/v4/timelines?location=40.75872069597532,-73.98529171943665&fields=temperature&timesteps=1h&units=metric&apikey=VaTD4KM7W4nSBR8fev6ibZwqfUxPG0I7')
+  var zipValue = inputZip.value;
+  var geoip = zipValue;
+    fetch(`https://api.tomorrow.io/v4/timelines?location=${geoip}&timesteps=1d&units=imperial&apikey=VaTD4KM7W4nSBR8fev6ibZwqfUxPG0I7`)
     .then(function(response){
         return response.json()
      })
      .then(function(data){
         console.log(data)
      }) 
-    var inputZip = document.getElementById("zipcode");
-    var zipValue = inputZip.value;
-    var geoip = zipValue;
     var range = "30mi";
     var sort = "datetime_local.asc";
     var per_page = "15";
