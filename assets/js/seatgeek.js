@@ -3,7 +3,6 @@ var seatgeek_client_secret =
   "1b45269a11cd2685a79a76e3c63190c3a50f086fc0ab96dbee76db60aec91e0e";
 
 
-
 function getEventData(url) {
   fetch(url).then(function (response) {
     if (response.ok) {
@@ -16,19 +15,18 @@ function getEventData(url) {
         processData(data.events);
       });
     } else {
-      alert("ERROR" + response.statusText);
+      console.log("ERROR" + response.statusText);
     }
   });
 }
 
 function processData(eventList) {
   if (eventList.length === 0) {
-    alert("ERROR, no events found");
+    console.log("No events found");
     return;
   }
 
   for (var i = 0; i < eventList.length; i++) {
-    // console.log(eventList[i]);
     console.log("=====================");
     console.log("Event: " + i);
     var title = eventList[i].title;
@@ -36,7 +34,6 @@ function processData(eventList) {
     var date = eventList[i].datetime_local;
     var url = eventList[i].url;
     var address = `${eventList[i].venue.name}: ${eventList[i].venue.address}, ${eventList[i].venue.extended_address}`;
-    // need performers
     console.log("Title: " + title);
     console.log("Type: " + type);
     console.log("Date: " + date);
