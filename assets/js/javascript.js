@@ -23,7 +23,7 @@ button.addEventListener("click", function () {
   var taxonomies = "";
 
   var seatgeek_url_with_arguments = `https://api.seatgeek.com/2/events?client_id=${seatgeek_client_id}&client_secret=${seatgeek_client_secret}&geoip=${geoip}&range=${range}&sort=${sort}&per_page=${per_page}&taxonomies.name=${taxonomies}`;
-  // getEventData(seatgeek_url_with_arguments)
+  getEventData(seatgeek_url_with_arguments);
 });
 
 function retrieve() {
