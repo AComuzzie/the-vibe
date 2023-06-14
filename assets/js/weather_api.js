@@ -32,9 +32,9 @@ const units = "imperial";
 const timesteps = ["current", "1h", "1d"];
 
 // configure the time frame up to 6 hours back and 15 days out
-// const now = moment.utc();
-// const startTime = moment.utc(now).add(0, "minutes").toISOString();
-// const endTime = moment.utc(now).add(1, "days").toISOString();
+const now = moment().local();
+const startTime = moment().local(now).add(0, "minutes").toISOString();
+const endTime = moment().local(now).add(4, "days").toISOString();
 
 const timezone = "America/New_York";
 
@@ -59,8 +59,8 @@ const paramsObj = {
   fields: fields,
   units: units,
   timesteps: timesteps,
-  // startTime,
-  // endTime,
+  startTime: startTime,
+  //   endTime: endTime,
   timezone: timezone,
 };
 const searchParams = new URLSearchParams(paramsObj);
