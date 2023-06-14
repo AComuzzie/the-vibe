@@ -74,6 +74,8 @@ function processData(eventList) {
     var title = pulledEventList[i].title;
     var type = pulledEventList[i].type;
     var date = pulledEventList[i].datetime_local;
+    var newDate = new Date(date);
+    var formattedDate =newDate.toLocaleString();
     var url = pulledEventList[i].url;
     var address = `${pulledEventList[i].venue.name}: ${pulledEventList[i].venue.address}, ${pulledEventList[i].venue.extended_address}`;
     console.log("Title: " + title);
@@ -81,36 +83,37 @@ function processData(eventList) {
     console.log("Date: " + date);
     console.log("URL: " + url);
     console.log("Address: " + address);
+    
+    var eventCard = document.createElement("div");
+    eventCard.className = "card";
+    eventCard.classList.add("has-background-dark", "m-1")
+    var eventCardContent = document.createElement("div")
+    eventCardContent.className = "card-content";
+    eventCard.appendChild(eventCardContent);
+    var eventContent = document.createElement("ul")
+    eventContent.className = "content";
+    var eventPerformer = document.createElement("li");
+    var eventLocation = document.createElement("li");
+    var eventTime = document.createElement("li");
+    var eventURL = document.createElement("li");
+    eventPerformer.className = "has-text-light"
+    eventLocation.className = "has-text-light"
+    eventTime.className = "has-text-light"
+    eventURL.className = "has-text-light"
+
+    eventPerformer.textContent = "Event: " + title;
+    eventTime.textContent = "Date: " + formattedDate;
+    eventLocation.textContent = "Address: " + address;
+    eventURL.textContent = "URL: " + url;
+
+    eventContent.appendChild(eventPerformer);
+    eventContent.appendChild(eventTime);
+    eventContent.appendChild(eventLocation);
+    eventContent.appendChild(eventURL);
+    eventCardContent.appendChild(eventContent);
+    eventsCards.appendChild(eventCard);
   }
 
-  var eventCard = document.createElement("div");
-  eventCard.className = "card";
-  eventCard.classList.add("has-background-dark", "m-1")
-  var eventCardContent = document.createElement("div")
-  eventCardContent.className = "card-content";
-  eventCard.appendChild(eventCardContent);
-  var eventContent = document.createElement("ul")
-  eventContent.className = "content";
-  var eventPerformer = document.createElement("li");
-  var eventLocation = document.createElement("li");
-  var eventTime = document.createElement("li");
-  var eventURL = document.createElement("li");
-
-  eventPerformer.className = "has-text-light"
-  eventLocation.className = "has-text-light"
-  eventTime.className = "has-text-light"
-  eventURL.className = "has-text-light"
-
-  eventPerformer.textContent = "Performer";
-  eventLocation.textContent = "Location";
-  eventTime.textContent = "Time";
-  eventURL.textContent = "URL";
-
-  eventContent.appendChild(eventPerformer);
-  eventContent.appendChild(eventLocation);
-  eventContent.appendChild(eventTime);
-  eventContent.appendChild(eventURL);
-  eventCardContent.appendChild(eventContent);
-  eventsCards.appendChild(eventCard);
+  
 
 }
