@@ -1,6 +1,36 @@
 const zipcodeInput = document.getElementById("zipcode");
 const button = document.getElementById("button-id");
 
+const weatherCodeAnswers = {
+  0: "Unknown",
+  1000: "Clear",
+  1001: "Cloudy",
+  1100: "Mostly Clear",
+  1101: "Partly Cloudy",
+  1102: "Mostly Cloudy",
+  2000: "Fog",
+  2100: "Light Fog",
+  3000: "Light Wind",
+  3001: "Wind",
+  3002: "Strong Wind",
+  4000: "Drizzle",
+  4001: "Rain",
+  4200: "Light Rain",
+  4201: "Heavy Rain",
+  5000: "Snow",
+  5001: "Flurries",
+  5100: "Light Snow",
+  5101: "Heavy Snow",
+  6000: "Freezing Drizzle",
+  6001: "Freezing Rain",
+  6200: "Light Freezing Rain",
+  6201: "Heavy Freezing Rain",
+  7000: "Ice Pellets",
+  7101: "Heavy Ice Pellets",
+  7102: "Light Ice Pellets",
+  8000: "Thunderstorm",
+};
+
 // return the weather API URL
 function get_weatherAPI_URL(zipcode) {
   // Weather API setup: tomorrow.io
@@ -26,7 +56,7 @@ function get_weatherAPI_URL(zipcode) {
   ];
 
   const units = "imperial";
-  const timesteps = ["current", "1h", "1d"];
+  const timesteps = ["1d"];
   const timezone = "America/New_York";
 
   // configure the time frame up to 6 hours back and 15 days out
@@ -64,10 +94,27 @@ function getWeather() {
     compress: true,
   })
     .then((result) => result.json())
-    .then((json) => console.log(json))
+    .then(outputWeatherData)
     .catch((error) => console.error("error: " + error));
 
   zipcodeInput.value = "";
+}
+
+function outputWeatherData(data) {
+  console.log(data);
+
+  const weatherForcasts = data.data.timelines[0].intervals;
+  for (let i = 0; i < weatherForcasts.length; i++) {
+    const date = weatherForcasts[i].startTime;
+    const temperature = weatherForcasts[i].values.temperature;
+    const weatherCode = weatherForcasts[i].values.weatherCode;
+    const weather = weatherCodeAnswers[weatherCode];
+
+    console.log("Day: " + i);
+    console.log("Date: " + date);
+    console.log("Temperature: " + temperature);
+    console.log("Weather: " + weather);
+  }
 }
 
 button.addEventListener("click", getWeather);
