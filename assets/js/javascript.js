@@ -14,9 +14,6 @@ button.addEventListener("click", function () {
   getEventData(seatgeek_url_with_arguments);
 });
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     el.addEventListener('click', swapper, false);
-// });
 
 var seatgeek_client_id = "MzQxNDQzNDF8MTY4NjEwMjgwNC4wNzc1ODk1";
 var seatgeek_client_secret =
@@ -64,7 +61,7 @@ function processData(eventList) {
 
     var eventCard = document.createElement("div");
     eventCard.className = "card";
-    eventCard.classList.add("has-background-dark", "m-1", "mr-5");
+    eventCard.classList.add("bg-slate-800", "border-2", "border-green-400", "m-1", "mr-5");
     var eventCardContent = document.createElement("div");
     eventCardContent.className = "card-content";
     eventCard.appendChild(eventCardContent);
