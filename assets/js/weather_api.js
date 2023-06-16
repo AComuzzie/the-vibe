@@ -1,4 +1,5 @@
 const zipcodeInput = document.getElementById("zipcode");
+const weatherOutputField = document.getElementById("weather");
 
 const weatherCodeAnswers = {
   0: "Unknown",
@@ -98,7 +99,7 @@ const weatherCodeAnswers = {
 };
 
 const precipitationTypeAnswers = {
-  0: "N/A",
+  0: "No rain",
   1: "Rain",
   2: "Snow",
   3: "Freezing Rain",
@@ -151,35 +152,36 @@ function get_weatherAPI_URL(zipcode) {
   };
 
   const searchParams = new URLSearchParams(paramsObj);
-  console.log(searchParams.toString());
+  // console.log(searchParams.toString());
 
   return getTimelineURL + "?" + searchParams.toString();
 }
 
 function getWeather() {
   const zipcode = zipcodeInput.value;
-  console.log(zipcode);
+  // console.log(zipcode);
 
   const url = get_weatherAPI_URL(zipcode);
-  console.log(url);
+  // console.log(url);
 
   fetch(url, {
     method: "GET",
     compress: true,
   })
     .then((result) => result.json())
-    .then(outputWeatherData)
+    .then(processWeatherData)
     .catch((error) => console.error("error: " + error));
 
   zipcodeInput.value = "";
 }
 
-function outputWeatherData(data) {
-  console.log(data);
+function processWeatherData(data) {
+  // console.log(data);
 
   const weatherForcasts = data.data.timelines[0].intervals;
   for (let i = 0; i < weatherForcasts.length; i++) {
-    const date = weatherForcasts[i].startTime;
+    const date = new Date(weatherForcasts[i].startTime);
+    const formattedDate = date.toLocaleString();
     const temperature = weatherForcasts[i].values.temperature;
     const weather =
       weatherCodeAnswers[weatherForcasts[i].values.weatherCodeFullDay];
@@ -190,15 +192,70 @@ function outputWeatherData(data) {
     const precipitationIntensity =
       weatherForcasts[i].values.precipitationIntensity;
 
-    console.log("Day: " + i);
-    console.log("Date: " + date);
-    console.log("Temperature: " + temperature);
-    console.log("Weather: " + weather);
-    console.log(`Wind Speed: ${windSpeed} mph`);
-    console.log(`Wind gust: ${windGust} mph`);
-    console.log(`Precipitation Tpye: ${precipitationType}`);
-    console.log(`Precipitation intensity: ${precipitationIntensity} in/hr`);
+    appendingWeatherData(
+      formattedDate,
+      temperature,
+      weather,
+      windSpeed,
+      windGust,
+      precipitationType,
+      precipitationIntensity
+    );
+
+    // console.log("Day: " + i);
+    // console.log("Date: " + formattedDate);
+    // console.log("Temperature: " + temperature);
+    // console.log("Weather: " + weather);
+    // console.log(`Wind Speed: ${windSpeed} mph`);
+    // console.log(`Wind gust: ${windGust} mph`);
+    // console.log(`Precipitation Tpye: ${precipitationType}`);
+    // console.log(`Precipitation intensity: ${precipitationIntensity} in/hr`);
   }
+}
+
+function appendingWeatherData(
+  date,
+  temperature,
+  weatherDescription,
+  windSpeed,
+  windGust,
+  precipitationType,
+  precipitationIntensity
+) {
+  let weatherCard = document.createElement("div");
+  weatherCard.classList = "card has-background-dark m-1";
+  let weatherCardContent = document.createElement("div");
+  weatherCardContent.classList = "card-content";
+  weatherCard.appendChild(weatherCardContent);
+
+  let weatherData = document.createElement("ul");
+  weatherData.classList = "content";
+
+  let dateField = document.createElement("li");
+  dateField.textContent = `Date: ${date}`;
+  dateField.classList = "has-text-light";
+  let temperatureField = document.createElement("li");
+  temperatureField.textContent = `Temperature: ${temperature} F`;
+  temperatureField.classList = "has-text-light";
+  let weatherDescriptionField = document.createElement("li");
+  weatherDescriptionField.textContent = `The weather is ${weatherDescription}!`;
+  weatherDescriptionField.classList = "has-text-light";
+  let windSpeedField = document.createElement("li");
+  windSpeedField.textContent = `Wind speed: ${windSpeed} mph --- Wind gust ${windGust} mph`;
+  windSpeedField.classList = "has-text-light";
+  let precipitationField = document.createElement("li");
+  precipitationField.textContent = `Precipitation: ${precipitationType} - ${precipitationIntensity} in/hr`;
+  precipitationField.classList = "has-text-light";
+
+  weatherData.appendChild(dateField);
+  weatherData.appendChild(temperatureField);
+  weatherData.appendChild(weatherDescriptionField);
+  weatherData.appendChild(windSpeedField);
+  weatherData.appendChild(precipitationField);
+
+  weatherCardContent.appendChild(weatherData);
+
+  weatherOutputField.appendChild(weatherCard);
 }
 
 button.addEventListener("click", getWeather);
