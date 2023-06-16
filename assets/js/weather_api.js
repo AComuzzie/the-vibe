@@ -121,12 +121,7 @@ function get_weatherAPI_URL(zipcode) {
     "precipitationType",
     "windSpeed",
     "windGust",
-    // "windDirection",
     "temperature",
-    // "temperatureApparent",
-    // "cloudCover",
-    // "cloudBase",
-    // "cloudCeiling",
     "weatherCodeFullDay",
   ];
 
@@ -147,23 +142,20 @@ function get_weatherAPI_URL(zipcode) {
     units: units,
     timesteps: timesteps,
     startTime: startTime,
-    //   endTime: endTime,
     timezone: timezone,
   };
 
   const searchParams = new URLSearchParams(paramsObj);
-  // console.log(searchParams.toString());
+ 
 
   return getTimelineURL + "?" + searchParams.toString();
 }
 
 function getWeather() {
   const zipcode = zipcodeInput.value;
-  // console.log(zipcode);
 
   const url = get_weatherAPI_URL(zipcode);
-  // console.log(url);
-
+  
   fetch(url, {
     method: "GET",
     compress: true,
@@ -176,7 +168,7 @@ function getWeather() {
 }
 
 function processWeatherData(data) {
-  // console.log(data);
+
 
   const weatherForcasts = data.data.timelines[0].intervals;
   for (let i = 0; i < weatherForcasts.length; i++) {
@@ -202,14 +194,7 @@ function processWeatherData(data) {
       precipitationIntensity
     );
 
-    // console.log("Day: " + i);
-    // console.log("Date: " + formattedDate);
-    // console.log("Temperature: " + temperature);
-    // console.log("Weather: " + weather);
-    // console.log(`Wind Speed: ${windSpeed} mph`);
-    // console.log(`Wind gust: ${windGust} mph`);
-    // console.log(`Precipitation Tpye: ${precipitationType}`);
-    // console.log(`Precipitation intensity: ${precipitationIntensity} in/hr`);
+
   }
 }
 
@@ -223,7 +208,7 @@ function appendingWeatherData(
   precipitationIntensity
 ) {
   let weatherCard = document.createElement("div");
-  weatherCard.classList = "card has-background-dark m-1";
+  weatherCard.classList = "card bg-slate-800 border-2 border-fuchsia-500 m-1 ml-5";
   let weatherCardContent = document.createElement("div");
   weatherCardContent.classList = "card-content";
   weatherCard.appendChild(weatherCardContent);
