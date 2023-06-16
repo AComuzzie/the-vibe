@@ -1,5 +1,4 @@
 const zipcodeInput = document.getElementById("zipcode");
-const button = document.getElementById("button-id");
 
 const weatherCodeAnswers = {
   0: "Unknown",
