@@ -6,33 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who's On First?</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chicle&display=swap" rel="stylesheet">
 </head>
 
 <body> 
-    <section class="hero has-background-dark">
+    <section class="hero is-medium w-full bg-center bg-cover"
+    style="background-image: url(./assets/images/I7nbYRcopy.jpg);">
         <div class="hero-body has-text-centered">
-            <p class="title has-text-white">
+            <p class="title text-amber-400 text-7xl tracking-wider">
                 Who's On First?
               </p>
-              <p class="subtitle has-text-success">
+              <p class="subtitle text-amber-400 text-4xl">
                 Find out whats happening in your city, today!              
         </div>
-
-        <figure class="image is-128x128 is-align-self-center">
-            <img class="is-rounded is-justify-content-center" src="./assets/images/2tickets.png">
-          </figure>
-
     </section>    
 
     </section>
- <section class="main has-background-dark">
-    <section class="section">    
-        <div class="box">
+ <section class="main has-background-dark bg-slate-700">
+    <section class="section bg-slate-700">    
+        <div class="box bg-slate-700">
             <input id="zipcode" class="input is-responsive has-background-success-light has-text-black" type="text" placeholder="Enter Your Zipcode!">
         </div>
 
         <div>
-            <button id="button-id" class="button is-normal is-fullwidth is-responsive is-success has-text-light" type="submit" value="Submit input">
+            <button id="button-id" class="button is-normal is-fullwidth is-responsive has-text-light bg-gradient-to-r from-green-400 to-fuchsia-500" type="submit" value="Submit input">
                 Party Time!
                 
             </button>
@@ -40,10 +41,9 @@
     </section>   
  </section>
 
- <section class="apis">
+ <section class="apis bg-slate-700">
     <div class="columns">
     <div class="column">
-        Weather API
         <div id="clickme"></div>
 	<div id="mydiv" style="width: 100%; height: 200px;"></div>
     </div>
@@ -51,6 +51,18 @@
     </div>
     </div>
  </section>
+
+ <section class="footer bg-slate-700">
+    <div class="content has-text-centered text-zinc-400">
+     <p>
+        Traivon Terry, Danny Wang, Jordan Roberts, Andrew Comuzzie - 2023
+    </p>
+    <p>
+        Who's on First? ™  
+    </p>
+    </div>
+ </section>
+
  <script src="./assets/js/seatgeek.js"></script>
  <script src="./assets/js/javascript.js"></script>
 </body>
