@@ -64,7 +64,7 @@ function processData(eventList) {
 
     var eventCard = document.createElement("div");
     eventCard.className = "card";
-    eventCard.classList.add("has-background-dark", "m-1");
+    eventCard.classList.add("has-background-dark", "m-1", "mr-5");
     var eventCardContent = document.createElement("div");
     eventCardContent.className = "card-content";
     eventCard.appendChild(eventCardContent);
