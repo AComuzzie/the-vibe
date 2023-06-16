@@ -95,16 +95,18 @@ function processData(eventList) {
     var eventPerformer = document.createElement("li");
     var eventLocation = document.createElement("li");
     var eventTime = document.createElement("li");
-    var eventURL = document.createElement("li");
+    var eventURL = document.createElement("a");
     eventPerformer.className = "has-text-light"
     eventLocation.className = "has-text-light"
     eventTime.className = "has-text-light"
-    eventURL.className = "has-text-light"
+    eventURL.className = "has-text-primary"
 
     eventPerformer.textContent = "Event: " + title;
     eventTime.textContent = "Date: " + formattedDate;
     eventLocation.textContent = "Address: " + address;
-    eventURL.textContent = "URL: " + url;
+    eventURL.href = url;
+    eventURL.target = "_blank";
+    eventURL.innerText = "View Seats / Get Tickets!"
 
     eventContent.appendChild(eventPerformer);
     eventContent.appendChild(eventTime);
