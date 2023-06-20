@@ -106,16 +106,17 @@ const precipitationTypeAnswers = {
   4: "Ice Pellets",
 };
 
-// return the weather API URL
+// This function returns the weather API URL based on the zip code and other parameters
 function get_weatherAPI_URL(zipcode) {
   // Weather API setup: tomorrow.io
   const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
   const apikey = "bLebZBiU0rLuVaqnLdP5kKsF8LCL83WD";
 
-  // API results setup
+  // API results setup:
+
   let search_location = zipcode;
 
-  // list the fields
+  // list the fields: what kinds of data we want the weather api to return
   const fields = [
     "precipitationIntensity",
     "precipitationType",
@@ -134,7 +135,7 @@ function get_weatherAPI_URL(zipcode) {
   const startTime = moment().local(now).add(0, "minutes").toISOString();
   const endTime = moment().local(now).add(4, "days").toISOString();
 
-  // combine the parameters
+  // combine the parameters to a URL string using URLSearchParams
   const paramsObj = {
     apikey: apikey,
     location: search_location,
@@ -144,18 +145,19 @@ function get_weatherAPI_URL(zipcode) {
     startTime: startTime,
     timezone: timezone,
   };
-
   const searchParams = new URLSearchParams(paramsObj);
- 
 
   return getTimelineURL + "?" + searchParams.toString();
 }
 
+// This function gets the weather data from the weather API, tomorrow.io, and passes the data to
+// the processWeatherData function.
 function getWeather() {
   const zipcode = zipcodeInput.value;
 
+  // Use the get_weatherAPI_URL function to get the URL for fetching
   const url = get_weatherAPI_URL(zipcode);
-  
+
   fetch(url, {
     method: "GET",
     compress: true,
@@ -167,9 +169,9 @@ function getWeather() {
   zipcodeInput.value = "";
 }
 
+// This function processes the json format data from the getWeather function.
+// The six days results are passed to the appendingWeatherData function to be appended to the index.html.
 function processWeatherData(data) {
-
-
   const weatherForcasts = data.data.timelines[0].intervals;
   for (let i = 0; i < weatherForcasts.length; i++) {
     const date = new Date(weatherForcasts[i].startTime);
@@ -193,11 +195,11 @@ function processWeatherData(data) {
       precipitationType,
       precipitationIntensity
     );
-
-
   }
 }
 
+// This function takes the data from the processWeatherData function.
+// And then displays/appends them onto the index.html.
 function appendingWeatherData(
   date,
   temperature,
@@ -208,7 +210,8 @@ function appendingWeatherData(
   precipitationIntensity
 ) {
   let weatherCard = document.createElement("div");
-  weatherCard.classList = "card bg-slate-800 border-2 border-fuchsia-500 m-1 ml-5";
+  weatherCard.classList =
+    "card bg-slate-800 border-2 border-fuchsia-500 m-1 ml-5";
   let weatherCardContent = document.createElement("div");
   weatherCardContent.classList = "card-content";
   weatherCard.appendChild(weatherCardContent);
