@@ -39,5 +39,5 @@ Tailwind - https://tailwindcss.com/
 Photo Credit: 
 Photography Aditya Chinchure, via Unsplash.com
 
-Deployed Link: https://acomuzzie.github.io/the-vibe/
+Deployed Link: https://acomuzzie.github.io/whos-on-first/
 Github Link: https://github.com/AComuzzie/whos-on-first
