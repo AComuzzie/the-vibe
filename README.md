@@ -16,7 +16,7 @@ Input the zipcode of the area you would like to check and the application will p
 
 
 ## Sneak Peek
-<img width="1470" alt="Screenshot 2023-06-19 at 8 42 13 PM" src="https://github.com/AComuzzie/the-vibe/assets/131213888/ec93086c-963d-4d53-a69c-bc73219d5715">
+![Screenshot of Who's on First Site](./assets/images/website-screenshot.png)
 
 
 
@@ -32,7 +32,12 @@ SeatGeek - https://platform.seatgeek.com/
 Tomorrow.io - https://www.tomorrow.io/
 
 CSS Frameworks:
+Photography Aditya Chinchure, via Unsplash.com
 Bulma - https://bulma.io/
 Tailwind - https://tailwindcss.com/
 
+Photo Credit: 
+Photography Aditya Chinchure, via Unsplash.com
+
 Deployed Link: https://acomuzzie.github.io/the-vibe/
+Github Link: https://github.com/AComuzzie/whos-on-first
