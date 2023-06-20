@@ -1,6 +1,7 @@
 var eventsCards = document.getElementById("events");
 var inputZip = document.getElementById("zipcode");
 
+// Button event listener, calls SeatGeek API with parameters that can be set below (i.e. rang,sort,per page)
 const button = document.getElementById("button-id");
 button.addEventListener("click", function () {
   var zipValue = inputZip.value;
@@ -14,20 +15,21 @@ button.addEventListener("click", function () {
   getEventData(seatgeek_url_with_arguments);
 });
 
-
+// SeatGeek API necessary "passcodes"
 var seatgeek_client_id = "MzQxNDQzNDF8MTY4NjEwMjgwNC4wNzc1ODk1";
 var seatgeek_client_secret =
   "1b45269a11cd2685a79a76e3c63190c3a50f086fc0ab96dbee76db60aec91e0e";
 
+// Fetches API data and logs error into console if response error
 function getEventData(url) {
   fetch(url).then(function (response) {
     if (response.ok) {
       console.log(response);
       response.json().then(function (data) {
         console.log(data);
-        console.log(
-          "-----------------------------------------------------------"
-        );
+        /* console.log(
+           "-----------------------------------------------------------"
+         ); */
         processData(data.events);
       });
     } else {
@@ -36,6 +38,7 @@ function getEventData(url) {
   });
 }
 
+// processData function iterates through Data objects and creates card items with pertaining information as list items and the URL for each as an anchor
 function processData(eventList) {
   if (eventList.length === 0) {
     console.log("No events found");
@@ -45,7 +48,7 @@ function processData(eventList) {
   var pulledEventList = JSON.parse(localStorage.getItem("eventList"));
   for (var i = 0; i < pulledEventList.length; i++) {
     console.log("=====================");
-    console.log("Event: " + i);
+    // console.log("Event: " + i);
     var title = pulledEventList[i].title;
     var type = pulledEventList[i].type;
     var date = pulledEventList[i].datetime_local;
@@ -53,12 +56,14 @@ function processData(eventList) {
     var formattedDate = newDate.toLocaleString();
     var url = pulledEventList[i].url;
     var address = `${pulledEventList[i].venue.name}: ${pulledEventList[i].venue.address}, ${pulledEventList[i].venue.extended_address}`;
-    console.log("Title: " + title);
-    console.log("Type: " + type);
-    console.log("Date: " + date);
-    console.log("URL: " + url);
-    console.log("Address: " + address);
+    // console.log("Title: " + title);
+    // console.log("Type: " + type);
+    // console.log("Date: " + date);
+    // console.log("URL: " + url);
+    // console.log("Address: " + address);
 
+
+    // Cards and content created and populate with SeatGeek data, classes are added for styling with respect to Bulma and Tailwind Frameworks
     var eventCard = document.createElement("div");
     eventCard.className = "card";
     eventCard.classList.add("bg-slate-800", "border-2", "border-green-400", "m-1", "mr-5");
